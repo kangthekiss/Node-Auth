@@ -2,6 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const passport = require('passport')
+const cors = require('cors')
 
 require('dotenv').config()
 require('./database/mongodb')
@@ -15,6 +16,7 @@ const profileRouter = require('./routers/profile')
 const app = express()
 const port = PORT || 3000
 
+app.use(cors())
 app.use(logger(LOGGER))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
