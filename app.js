@@ -19,10 +19,13 @@ const port = PORT || 3000
 app.use(cors())
 app.use(logger(LOGGER))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(passport.initialize())
 
 // Router
+app.get('/', (req, res) => {
+  res.json({ message: 'node-auth' })
+})
 app.use('/auth', authRouter)
 app.use('/profile', profileRouter)
 
@@ -39,9 +42,9 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
-  
+
   const error = err.message
-  res.status(err.status || 500).json({error})
+  res.status(err.status || 500).json({ error })
 })
 
 app.listen(port, () => {
